@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
     
     <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
         <constructor-arg ref="dataSourceSpied" />
@@ -14,10 +13,10 @@
     </bean>
     
     <bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://junhodbinstance.crvjx5rsqvcn.ap-northeast-2.rds.amazonaws.com:3306/myheart"/>
-        <property name="username" value="skout90"/>
-        <property name="password" value="2323aa"/>
+        <property name="driverClassName" value="#{dbProp['driverClassName']}"/>
+        <property name="url" value="#{dbProp['url']}"/>
+        <property name="username" value="#{dbProp['username']}"/>
+        <property name="password" value="#{dbProp['password']}"/>
     </bean>
   
      <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">

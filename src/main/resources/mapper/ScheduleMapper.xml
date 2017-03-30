@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  Class Name  : ScheduleMapper.xml
+  Description : 스케줄 매퍼
+  Modification Information
+
+       수정일                     수정자              수정내용
+    ────────────   ─────────   ───────────────────────────────
+    2017. 3. 24.   남준호              최초생성
+
+  @author 남준호
+  @since 2017. 3. 24.
+  @version 1.0
+
+  Copyright (C) 2017 by MyHeart All right reserved.
+-->
+<mapper namespace="com.iyl.stock.mapper.ScheduleMapper">
+    <resultMap id="scheduleVo" type="com.iyl.stock.vo.ScheduleVo" >
+        <result property="seqno"        column="seqno" />
+        <result property="lastRcpNo"    column="last_rcp_no" />
+        <result property="title"        column="title" />
+        <result property="contents"     column="contents" />
+        <result property="regDt"        column="reg_dt" />
+    </resultMap>
+
+    <sql id="selectSearchWhere">
+
+    </sql>
+
+    <select id="selectList" resultMap="scheduleVo">
+        SELECT  seqno
+                ,last_rcp_no
+                ,title
+                ,contents
+                ,reg_dt
+        FROM    stock_schedule
+        ORDER BY seqno DESC
+        LIMIT   10
+    </select>
+
+    <select id="select" resultMap="scheduleVo">
+        SELECT  seqno
+                ,last_rcp_no
+                ,title
+                ,contents
+                ,reg_dt
+        FROM    stock_schedule
+        ORDER BY seqno DESC
+        LIMIT   1
+    </select>
+    
+    <insert id="insert">
+        INSERT INTO stock_schedule (
+            last_rcp_no
+            ,title
+            ,contents
+        ) VALUES (
+            #{lastRcpNo}
+            ,#{title}
+            ,#{contents}
+        )
+    </insert>
+</mapper>

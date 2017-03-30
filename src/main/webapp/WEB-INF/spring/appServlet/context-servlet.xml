@@ -24,7 +24,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.iyl.stock.controller" />
-	<context:component-scan base-package="com.iyl.stock.service.impl" />
+	<context:component-scan base-package="com.iyl.stock.service" />
 	
 	<beans:bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">

@@ -9,7 +9,6 @@
 	<configs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/context-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/context-datasource.xml</config>
-		<config>src/main/resources/mapper/DrugMapper.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -6,11 +6,13 @@
 </head>
 <body>
 <h1>
-	<c:forEach items="${drugSelect}" var="item">
-		${item.drugCd}<br/>
-		${item.drugNm}<br/>
-		${item.mainIngredientCd}<br/>
-		${item.description}<br/>
+	<c:forEach items="${resultList}" var="item">
+<%-- 		${item.drugCd}<br/> --%>
+<%-- 		${item.drugNm}<br/> --%>
+<%-- 		${item.mainIngredientCd}<br/> --%>
+<%-- 		${item.description}<br/> --%>
+		${item.pushTime}<br/>
+		${item.timeDivision}<br/>
 	</c:forEach> 
 	
 </h1>
