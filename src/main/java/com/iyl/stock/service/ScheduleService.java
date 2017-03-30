@@ -68,6 +68,7 @@ public class ScheduleService {
         }
         String newLastRcpNo = "";
         String contents = "";
+        String title = " 외";
         String key = (String) this.apiProp.get("api.dart.key");
         String requestUrl = String.format(API_URL + "%s&page_set=%d", key, DEFAULT_PAGE_SIZE);
 
@@ -83,6 +84,7 @@ public class ScheduleService {
             if (StringUtils.isEmpty(newLastRcpNo)) {
                 // 최신 접수 번호 등록
                 newLastRcpNo = node.path("rcp_no").asText();
+                title = node.path("crp_nm").asText() + title;
             }
 
             contents += String.format("[%s]\n%s\n", node.path("crp_nm").asText(), REPORT_URL + node.path("rcp_no").asText());
@@ -94,7 +96,7 @@ public class ScheduleService {
             String now = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
             ScheduleVo paramVo = new ScheduleVo();
             paramVo.setLastRcpNo(newLastRcpNo);
-            paramVo.setTitle(now + " 신규 공시");
+            paramVo.setTitle(now + title);
             paramVo.setContents(contents);
             this.mapper.insert(paramVo);
 

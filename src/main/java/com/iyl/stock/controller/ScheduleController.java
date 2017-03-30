@@ -1,9 +1,5 @@
 package com.iyl.stock.controller;
 
-import java.util.Properties;
-
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,8 +31,7 @@ public class ScheduleController {
     @Autowired
     ScheduleService scheduleService;
 
-    @Resource(name = "apiProp")
-    private Properties apiProp;
+    //    private static final Logger log = LoggerFactory.getLogger(MainController.class);
 
     /**
      * @Author 남준호
@@ -46,7 +41,6 @@ public class ScheduleController {
      */
     @RequestMapping(value = "selectScheduleList")
     public void selectScheduleList(ScheduleVo scheduleVo) throws Exception {
-        //        this.scheduleService.insertPush(scheduleVo);
         this.scheduleService.selectList(scheduleVo);
     }
 

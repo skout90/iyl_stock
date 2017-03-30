@@ -9,7 +9,7 @@
     <bean id="scheduleJob" class="com.iyl.stock.schedule.Schedule" />
     
     <task:scheduled-tasks> <!-- scheduled job list -->
-        <task:scheduled ref="scheduleJob" method="executeJob" cron="0/30 * * * * ?"/>
+        <task:scheduled ref="scheduleJob" method="executeJob" cron="0 0/20 * * * ?"/>
         <!-- add more job here -->
     </task:scheduled-tasks>
     
