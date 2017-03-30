@@ -30,6 +30,7 @@
 
     </sql>
 
+    <!-- 등록된 공시 스케줄 리스트를 리턴합니다. -->
     <select id="selectList" resultMap="scheduleVo">
         SELECT  seqno
                 ,last_rcp_no
@@ -41,7 +42,8 @@
         LIMIT   10
     </select>
 
-    <select id="select" resultMap="scheduleVo">
+    <!-- 마지막 등록된 공시 스케줄 상세 -->
+    <select id="selectLast" resultMap="scheduleVo">
         SELECT  seqno
                 ,last_rcp_no
                 ,title
@@ -51,7 +53,19 @@
         ORDER BY seqno DESC
         LIMIT   1
     </select>
+
+    <!-- 스케줄 상세 -->
+    <select id="select" resultMap="scheduleVo">
+        SELECT  seqno
+                ,last_rcp_no
+                ,title
+                ,contents
+                ,reg_dt
+        FROM    stock_schedule
+        WHERE   seqno   = #{seqno}
+    </select>
     
+    <!-- 스케줄 내용을 입력합니다. -->
     <insert id="insert">
         INSERT INTO stock_schedule (
             last_rcp_no

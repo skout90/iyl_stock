@@ -62,7 +62,7 @@ public class ScheduleService {
     public void insertPush() throws Exception {
         // 마지막 접수 번호를 확인합니다.
         String beforelastRcpNo = null;
-        ScheduleVo scheduleVo = this.select();
+        ScheduleVo scheduleVo = this.selectLast();
         if (scheduleVo != null) {
             beforelastRcpNo = scheduleVo.getLastRcpNo();
         }
@@ -121,8 +121,18 @@ public class ScheduleService {
      * @param scheduleVo
      * @throws Exception
      */
-    public ScheduleVo select() throws Exception {
-        return this.mapper.select();
+    public ScheduleVo selectLast() throws Exception {
+        return this.mapper.selectLast();
+    }
+
+    /**
+     * @Author 남준호
+     * @Comment 스케줄 상세 정보를 리턴합니다.
+     * @param scheduleVo
+     * @throws Exception
+     */
+    public ScheduleVo select(ScheduleVo scheduleVo) throws Exception {
+        return this.mapper.select(scheduleVo);
     }
 
     /**

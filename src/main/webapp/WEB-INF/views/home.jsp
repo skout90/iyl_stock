@@ -10,12 +10,12 @@
 	<title>IYL Stock</title>
 </head>
 <body>
-<h1>최근 공시 리스트</h1>
+    <h1>최근 공시 리스트</h1>
     <table class="table">
         <tbody>
         	<c:forEach items="${resultList}" var="item">
         		<tr>
-                    <td>${item.title}</td>
+                    <td><a href="/schedule/${item.seqno}">${item.title}</a></td>
                     <td>
                         <fmt:formatDate value="${item.regDt}" pattern="MM-dd HH:mm"/>   
                     </td>

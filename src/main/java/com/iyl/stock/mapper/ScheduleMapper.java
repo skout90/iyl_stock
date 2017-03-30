@@ -37,7 +37,15 @@ public interface ScheduleMapper {
      * @param scheduleVo
      * @throws Exception
      */
-    public ScheduleVo select() throws Exception;
+    public ScheduleVo selectLast() throws Exception;
+
+    /**
+     * @Author 남준호
+     * @Comment 스케줄 상세 정보를 리턴합니다.
+     * @param scheduleVo
+     * @throws Exception
+     */
+    public ScheduleVo select(ScheduleVo scheduleVo) throws Exception;
 
     /**
      * @Author 남준호
