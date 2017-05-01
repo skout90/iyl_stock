@@ -1,7 +1,6 @@
 package com.iyl.stock.mapper;
 
-import java.util.List;
-
+import com.iyl.stock.common.DataMap;
 import com.iyl.stock.vo.ScheduleVo;
 
 /**
@@ -21,15 +20,7 @@ import com.iyl.stock.vo.ScheduleVo;
  *
  * Copyright (C) 2017 by MyHeart All right reserved.
  */
-public interface ScheduleMapper {
-    /**
-     * @Author 남준호
-     * @Comment 스케줄 정보 리스트를 리턴합니다.
-     * @param scheduleVo
-     * @return
-     * @throws Exception
-     */
-    public List<ScheduleVo> selectList(ScheduleVo scheduleVo) throws Exception;
+public interface ScheduleMapper extends GenericMapper<DataMap, ScheduleVo> {
 
     /**
      * @Author 남준호
@@ -37,21 +28,6 @@ public interface ScheduleMapper {
      * @param scheduleVo
      * @throws Exception
      */
-    public ScheduleVo selectLast() throws Exception;
+    public DataMap selectLast() throws Exception;
 
-    /**
-     * @Author 남준호
-     * @Comment 스케줄 상세 정보를 리턴합니다.
-     * @param scheduleVo
-     * @throws Exception
-     */
-    public ScheduleVo select(ScheduleVo scheduleVo) throws Exception;
-
-    /**
-     * @Author 남준호
-     * @Comment 공시 스케줄 정보를 입력합니다.
-     * @param scheduleVo
-     * @throws Exception
-     */
-    public void insert(ScheduleVo scheduleVo) throws Exception;
 }

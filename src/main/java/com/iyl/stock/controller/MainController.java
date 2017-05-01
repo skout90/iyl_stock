@@ -35,8 +35,9 @@ public class MainController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Locale locale, Model model) throws Exception {
-        ScheduleVo scheduleVo = new ScheduleVo();
-        model.addAttribute("resultList", scheduleService.selectList(scheduleVo));
+        //        ScheduleVo scheduleVo = new ScheduleVo();
+        //                model.addAttribute("resultList", scheduleService.selectList(scheduleVo));
+        this.scheduleService.insertPush();
 
         return "home";
     }

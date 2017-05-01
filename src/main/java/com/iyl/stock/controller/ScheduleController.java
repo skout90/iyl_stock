@@ -39,7 +39,7 @@ public class ScheduleController {
      * @param scheduleVo
      * @return
      */
-    @RequestMapping(value = "selectScheduleList")
+    @RequestMapping(value = "list")
     public void selectScheduleList(ScheduleVo scheduleVo) throws Exception {
         this.scheduleService.selectList(scheduleVo);
     }
