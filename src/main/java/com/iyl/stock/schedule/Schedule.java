@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.iyl.stock.service.ScheduleService;
+import com.iyl.stock.vo.ScheduleVo;
 
 /**
  * <pre>
@@ -29,6 +30,7 @@ public class Schedule {
     private ScheduleService scheduleService;
 
     public void executeJob() throws Exception {
-        this.scheduleService.insertPush();
+        ScheduleVo scheduleVo = new ScheduleVo();
+        this.scheduleService.insert(scheduleVo);
     }
 }

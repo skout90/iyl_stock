@@ -12,5 +12,4 @@
         <task:scheduled ref="scheduleJob" method="executeJob" cron="0 0/20 * * * ?"/>
         <!-- add more job here -->
     </task:scheduled-tasks>
-    
 </beans>

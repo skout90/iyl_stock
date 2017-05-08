@@ -15,7 +15,7 @@
         <tbody>
         	<c:forEach items="${resultList}" var="item">
         		<tr>
-                    <td><a href="/schedule/${item.seqno}">${item.title}</a></td>
+                    <td><a href="/${item.seqno}">${item.title}</a></td>
                     <td>
                         <fmt:formatDate value="${item.regDt}" pattern="MM-dd HH:mm"/>   
                     </td>

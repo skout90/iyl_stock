@@ -171,6 +171,14 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.5.0</version>
         </dependency>
+
+        <!-- Json Library -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
         
         <!-- lombok -->
         <dependency>
@@ -190,6 +198,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
         </dependency>
         
 	</dependencies>

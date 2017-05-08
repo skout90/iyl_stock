@@ -1,9 +1,13 @@
 package com.iyl.stock.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iyl.stock.common.DataMap;
 import com.iyl.stock.service.ScheduleService;
 import com.iyl.stock.vo.ScheduleVo;
 
@@ -40,8 +44,19 @@ public class ScheduleController {
      * @return
      */
     @RequestMapping(value = "list")
-    public void selectScheduleList(ScheduleVo scheduleVo) throws Exception {
-        this.scheduleService.selectList(scheduleVo);
+    public List<DataMap> selectScheduleList(ScheduleVo scheduleVo) throws Exception {
+        return this.scheduleService.selectList(scheduleVo);
+    }
+
+    /**
+     * @Author 남준호
+     * @Comment 스케줄 상세 내용을 리턴합니다.
+     * @param scheduleVo
+     * @return
+     */
+    @RequestMapping(value = "{seqno}")
+    public DataMap selectSchedule(@PathVariable("seqno") Integer seqno, ScheduleVo scheduleVo) throws Exception {
+        return this.scheduleService.select(scheduleVo);
     }
 
     /**
@@ -50,8 +65,8 @@ public class ScheduleController {
      * @param scheduleVo
      * @return
      */
-    @RequestMapping(value = "insertSchedulePush")
-    public void insertSchedulePush(ScheduleVo scheduleVo) throws Exception {
-        this.scheduleService.insertPush();
+    @RequestMapping(value = "insertSchedule")
+    public void insertSchedule(ScheduleVo scheduleVo) throws Exception {
+        this.scheduleService.insert(scheduleVo);
     }
 }

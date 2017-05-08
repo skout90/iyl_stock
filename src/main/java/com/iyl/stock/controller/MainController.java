@@ -35,9 +35,9 @@ public class MainController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Locale locale, Model model) throws Exception {
-        //        ScheduleVo scheduleVo = new ScheduleVo();
-        //                model.addAttribute("resultList", scheduleService.selectList(scheduleVo));
-        this.scheduleService.insertPush();
+        ScheduleVo scheduleVo = new ScheduleVo();
+        model.addAttribute("resultList", scheduleService.selectList(scheduleVo));
+        this.scheduleService.insertPush("푸시 테스트");
 
         return "home";
     }
@@ -50,7 +50,7 @@ public class MainController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/schedule/{seqno}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{seqno}", method = RequestMethod.GET)
     public String selectScheduleView(@PathVariable Integer seqno, ScheduleVo scheduleVo, Model model) throws Exception {
         model.addAttribute("resultMap", scheduleService.select(scheduleVo));
 

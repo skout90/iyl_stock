@@ -2,8 +2,8 @@ package com.iyl.stock.service;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.iyl.stock.mapper.GenericMapper;
@@ -26,11 +26,11 @@ import com.iyl.stock.mapper.GenericMapper;
  * Copyright (C) 2017 by IYL All right reserved.
  */
 public class GenericService<M extends GenericMapper<R, P>, R, P> {
-    protected Log log;
+    protected Logger log;
     protected M mapper;
 
     public GenericService() {
-        this.log = LogFactory.getLog(super.getClass());
+        this.log = LoggerFactory.getLogger(super.getClass());
     }
 
     @Autowired

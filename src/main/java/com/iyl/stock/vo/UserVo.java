@@ -1,10 +1,8 @@
-package com.iyl.stock.common;
-
-import org.apache.commons.collections4.map.ListOrderedMap;
+package com.iyl.stock.vo;
 
 /**
  * <pre>
- * Class Name  : DataMap.java
+ * Class Name  : UserVo.java
  * Description :
  * Modification Information
  *
@@ -19,11 +17,9 @@ import org.apache.commons.collections4.map.ListOrderedMap;
  *
  * Copyright (C) 2017 by IYL All right reserved.
  */
-public class DataMap extends ListOrderedMap<Object, Object> {
-    private static final long serialVersionUID = 6723434363565852261L;
-
-    @Override
-    public Object put(Object key, Object value) {
-        return super.put(CamelUtil.convert2CamelCase((String) key), value);
-    }
+@lombok.Getter
+@lombok.Setter
+public class UserVo {
+    // 디바이스 토큰
+    String deviceToken;
 }

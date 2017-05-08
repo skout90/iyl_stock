@@ -1,10 +1,11 @@
-package com.iyl.stock.common;
+package com.iyl.stock.mapper;
 
-import org.apache.commons.collections4.map.ListOrderedMap;
+import com.iyl.stock.common.DataMap;
+import com.iyl.stock.vo.UserVo;
 
 /**
  * <pre>
- * Class Name  : DataMap.java
+ * Class Name  : UserMapper.java
  * Description :
  * Modification Information
  *
@@ -19,11 +20,6 @@ import org.apache.commons.collections4.map.ListOrderedMap;
  *
  * Copyright (C) 2017 by IYL All right reserved.
  */
-public class DataMap extends ListOrderedMap<Object, Object> {
-    private static final long serialVersionUID = 6723434363565852261L;
+public interface UserMapper extends GenericMapper<DataMap, UserVo> {
 
-    @Override
-    public Object put(Object key, Object value) {
-        return super.put(CamelUtil.convert2CamelCase((String) key), value);
-    }
 }
