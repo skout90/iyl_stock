@@ -1,19 +1,14 @@
 package com.iyl.stock.service;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.Properties;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +19,6 @@ import com.iyl.stock.mapper.ScheduleMapper;
 import com.iyl.stock.vo.ScheduleVo;
 import com.iyl.stock.vo.UserVo;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
@@ -57,7 +51,7 @@ public class ScheduleService extends GenericService<ScheduleMapper, DataMap, Sch
     private static final String REPORT_URL = "http://m.dart.fss.or.kr/html_mdart/MD1007.html?rcpNo=";
     private static final Integer DEFAULT_PAGE_SIZE = 100;
 
-    private static final String API_PUSH_URL = "https://api.ionic.io/push/notifications";
+    private static final String API_PUSH_URL = "https://fcm.googleapis.com/fcm/send";
 
     @Override
     public void insert(ScheduleVo scheduleVo) throws Exception {
@@ -114,36 +108,34 @@ public class ScheduleService extends GenericService<ScheduleMapper, DataMap, Sch
      * @return
      * @throws Exception
      */
-    public void insertPush(String title) throws Exception {
-        HttpClient httpClient = HttpClientBuilder.create().build();
+    public void insertPush(String message) throws Exception {
+        // Create connection to send FCM Message request.
+        URL url = new URL(API_PUSH_URL);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestProperty("Authorization", "key=" + apiProp.getProperty("google.fcm.key"));
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
 
-        try {
-            HttpPost request = new HttpPost(API_PUSH_URL);
-            // 헤더 설정
-            request.addHeader("content-type", "application/json");
-            request.addHeader("Authorization", "Bearer " + apiProp.getProperty("api.ionic.key"));
+        OutputStream outputStream = conn.getOutputStream();
 
-            // 푸시 메세지 내용
-            JSONObject messageObject = new JSONObject();
-            messageObject.put("message", URLEncoder.encode(title, "UTF-8").replaceAll("[+]", " "));
+        // 메시지 설정
+        JSONObject messageObject = new JSONObject();
+        messageObject.put("title", "IYLS 공시현황");
+        messageObject.put("message", message);
 
-            // 푸시 대상
-            JSONArray jsonArray = new JSONArray();
-            for (DataMap result : this.userService.selectList(new UserVo())) {
-                jsonArray.add(result.get("deviceToken"));
-            }
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("data", messageObject.toString());
 
-            // 파라미터
-            JSONObject paramters = new JSONObject();
-            paramters.put("tokens", jsonArray.toString());
-            paramters.put("profile", apiProp.getProperty("api.ionic.profile"));
-            paramters.put("notification", messageObject.toString());
+        // 푸시전송
+        for (DataMap result : this.userService.selectList(new UserVo())) {
+            jsonObject.put("to", result.get("deviceToken"));
 
-            request.setEntity(new StringEntity(paramters.toString()));
-            HttpResponse response = httpClient.execute(request);
-            this.log.debug(new BasicResponseHandler().handleResponse(response));
-        } catch (Exception ex) {
-            this.log.debug(ex.getStackTrace().toString());
+            // Send FCM message content.
+            outputStream.write(jsonObject.toString().getBytes());
+
+            this.log.debug(String.valueOf(conn.getResponseCode()));
+            this.log.debug(conn.getResponseMessage());
         }
     }
 
